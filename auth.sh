@@ -1,5 +1,5 @@
 #!/bin/bash
-private="/opt/monzo/private"
+private="/opt/monzo/bin/private"
 
 state_token=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)
 client_id=$(cat "$private/client_id")

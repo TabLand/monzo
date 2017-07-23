@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-private="/opt/monzo/private"
+private="/opt/monzo/bin/private"
 
 client_id=$(cat "$private/client_id")
 client_secret=$(cat "$private/client_secret")

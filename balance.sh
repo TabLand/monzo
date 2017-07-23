@@ -1,5 +1,5 @@
 #!/bin/bash
-private="/opt/monzo/private"
+private="/opt/monzo/bin/private"
 
 access_token=$(cat "$private/access_token")
 account_id=$(cat   "$private/account_id")

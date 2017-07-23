@@ -1,6 +1,6 @@
 #!/bin/bash
 
-private="/opt/monzo/private"
+private="/opt/monzo/bin/private"
 
 #fetch the received auth code
 cat "$private/received_link" | egrep -o "\?code=.*&state=" | sed 's/?code=//g' | sed 's/&state=//g' > "$private/authorization_code"
