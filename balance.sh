@@ -13,4 +13,4 @@ curl -s -H "$auth_header" "https://api.monzo.com/balance?account_id=$account_id"
 
 balance=$(cat "$private/balance" | jq '.balance / 100')
 echo "$(date) I had £$balance left..." >> /var/log/monzo/balance.log
-echo "$balance"
+printf "%0.2f" $balance
