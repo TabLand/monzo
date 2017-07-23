@@ -11,6 +11,13 @@ cp "$private/balance" "$private/old/balance_$(date +%s)"
 
 curl -s -H "$auth_header" "https://api.monzo.com/balance?account_id=$account_id" > "$private/balance"
 
-balance=$(cat "$private/balance" | jq '.balance / 100')
-echo "$(date) I had £$balance left..." >> /var/log/monzo/balance.log
-printf "%0.2f" $balance
+error=$(cat "$private/balance" | egrep -i "unauthorized|bad|error" | wc -l)
+
+if [ "$error" == "0" ]; then
+    balance=$(cat "$private/balance" | jq '.balance / 100')
+    printf "%0.2f" $balance
+    echo "$(date) I had £$balance left..." >> /var/log/monzo/balance.log
+else
+    echo "????"
+    echo "$(date) Balance Check failure..." >> /var/log/monzo/balance.log
+fi
