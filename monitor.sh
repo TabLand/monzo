@@ -1,9 +1,9 @@
 #!/bin/bash
 # Monitoring to alert when access / refresh tokens have lapsed and Monzo integration is broken
-# This exception will require manual reauth
+# This exception may require manual reauth
 
 balance_check_failure=$(/opt/monzo/bin/balance.sh | grep "????" | wc -l)
-unexpected_balance_output=$(/opt/monzo/bin/balance.sh | egrep -v '^[0-9]+\.[0-9]{2}$' | wc -l)
+unexpected_balance_output=$(/opt/monzo/bin/balance.sh | egrep -v '^-?[0-9]+\.[0-9]{2}$' | wc -l)
 refresh_json_error=$(egrep -i "invalid|bad|error" /opt/monzo/bin/private/refresh | wc -l)
 refresh_token_lost=$(grep -i null /opt/monzo/bin/private/refresh_token | wc -l)
 access_token_lost=$(grep -i null /opt/monzo/bin/private/access_token | wc -l)
